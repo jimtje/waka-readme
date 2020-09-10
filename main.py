@@ -99,5 +99,9 @@ if __name__ == '__main__':
     rdmd = decode_readme(contents.content)
     new_readme = generate_new_readme(stats=waka_stats, readme=rdmd)
     if new_readme != rdmd:
-        repo.update_file(path=contents.path, message=commit_message,
+        try:
+            repo.update_file(path=contents.path, message=commit_message,
                          content=new_readme, sha=contents.sha, branch='master')
+        except:
+            repo.update_file(path=contents.path, message=commit_message,
+                         content=new_readme, sha=contents.sha, branch='main')
